@@ -34,7 +34,7 @@ Other pins: B1 = PC13 (button), LD2 = PA5 (LED).
 - **MCU:** STM32F401RE (Cortex-M4F, 84 MHz), STM32 HAL, STM32CubeMX / CubeIDE
 - **RTOS:** FreeRTOS Kernel (V11.x), `heap_4`, 32 KB heap
 - **Network stack:** lwIP 2.2.1 (ST's stm32-mw-lwip) with the FreeRTOS `sys_arch` port
-- **Ethernet:** Microchip ENC28J60 (rev B7) over SPI at 5.25 MHz
+- **Ethernet:** Microchip ENC28J60 (rev B6) over SPI at 5.25 MHz
 - **Toolchain:** arm-none-eabi-gcc 13.2
 
 ## Architecture
