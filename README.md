@@ -1,12 +1,5 @@
 # STM32 + ENC28J60 Ethernet with FreeRTOS and lwIP
 
-|GU|AU|aa|
-|---|-|-|
-|1|2|222|
-
-|GU|AU|aa|
-|1|2|222|
-
 A TCP/IP networking stack running on an STM32F401RE Nucleo board with a low-cost
 ENC28J60 SPI Ethernet module. It uses FreeRTOS and lwIP in full RTOS mode (`NO_SYS=0`)
 and has an interrupt-driven driver, link detection and a TCP echo server.
