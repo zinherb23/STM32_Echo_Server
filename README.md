@@ -1,7 +1,7 @@
 # STM32 + ENC28J60 Ethernet with FreeRTOS and lwIP
 
 |GU|AU|aa|
-|---|a|
+|---|a|nn|
 |1|2|222|
 
 
