@@ -94,26 +94,5 @@ Drivers/       STM32 HAL + CMSIS
 3. Set the IP and MAC in `Core/Inc/app_config.h` to match your LAN (default: `<192.168.x.x>`).
 4. Build (Debug), connect the Nucleo over USB and click Run.
 5. Open a serial terminal at `<115200>` 8N1 to see the log.
-6. Test:
-   ```bash
-   ping <board-ip>
-   nc <board-ip> 7        # or PuTTY → Connection type: Raw, port 7
-   ```
-   Type something and it's echoed back. Press B1 and you'll see `button pressed 1`.
+6. Type something and it's echoed back. 
 
-## Challenges and what I learned
-
-- **Corrupted SPI reads caused by GPIO slew rate, not timing.** One byte of the MAC address (MAADR6) consistently read `0x57` instead of `0xAB`. I wrote a run-time sweep (`enc28j60_spi_sweep`) that tried every combination of SPI prescaler and GPIO speed. It showed 0 errors at Low/Medium for every prescaler and failures at High/Very High. The cause was signal integrity: fast edges ringing on the jumper wires. The fix was setting the SPI pins' output speed to Medium. *Lesson: with flying wires, "faster" GPIO settings can make things worse, and measuring beats guessing.*
-- **Keeping the diagnostics.** The diagnostic code stays in the driver but only runs when init fails, so the cost at normal runtime is zero.
-- **Interrupt priorities with FreeRTOS on Cortex-M.** ISRs that call FreeRTOS APIs must sit at or below `configMAX_SYSCALL_INTERRUPT_PRIORITY` (EXTI0 = 6, EXTI15_10 = 7, TIM5 timebase = 15).
-- **lwIP thread safety.** Learned the difference between the raw, netconn and socket APIs and which threads may call each.
-- **Building in milestones.** I worked in four verifiable steps (clock + RTOS + log → ping → TCP echo → button events) and took a backup at each one, so every regression had a small search space.
-
-## Roadmap
-
-- [ ] Trim stack and heap sizes using the measured high-water marks (about 21 KB of heap is still free)
-- [ ] Production build profile: turn off development checks (stack-overflow hook, core-locking check, heartbeat)
-- [ ] DHCP client instead of a static IP
-- [ ] An application protocol on top (e.g. MQTT or a small HTTP status page)
-- [ ] Measure throughput with iperf
-- [ ] Move to a custom PCB to remove the flying-wire signal-integrity limits
