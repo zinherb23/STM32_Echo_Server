@@ -22,7 +22,7 @@ for an MCU without a built-in Ethernet MAC.
 
 | ENC28J60 | STM32F401RE (Nucleo) | Notes |
 |---|---|---|
-| SCK  | PC10 (SPI3_SCK)  | GPIO speed **Medium** (see Challenges) |
+| SCK  | PC10 (SPI3_SCK)  | |
 | MISO | PC11 (SPI3_MISO) | |
 | MOSI | PC12 (SPI3_MOSI) | |
 | CS   | PA4  | GPIO output, idle high |
