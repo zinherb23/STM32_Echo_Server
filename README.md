@@ -80,5 +80,5 @@ Drivers/       STM32 HAL + CMSIS
 3. Set the IP and MAC in `Core/Inc/app_config.h` to match your LAN (default: `<192.168.x.x>`).
 4. Build (Debug), connect the Nucleo over USB and click Run.
 5. Open a serial terminal at `<115200>` 8N1 to see the log.
-6. Type something and it's echoed back. 
+6. Type something or press B1 and it's echoed back. 
 
