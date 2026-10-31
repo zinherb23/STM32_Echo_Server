@@ -49,8 +49,7 @@ Other pins: B1 = PC13 (button), LD2 = PA5 (LED).
                                                                          │ (msg to tcpip thread)
  PC13 EXTI15_10 ─task notify─► [button  prio 2] ──FreeRTOS queue──► [echo    prio 3]
  (B1, falling)                  debounce, count     (press count)     BSD sockets + select()
-                                                                      port 7, one client,
-                                                                      2nd client → "busy"
+                                                                      port 7, one client
 ```
 
 | Task | Priority | Stack (words) | Role |
