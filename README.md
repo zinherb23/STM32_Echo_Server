@@ -6,18 +6,6 @@ and has an interrupt-driven driver, link detection and a TCP echo server.
 It's meant for embedded developers who want a small, working reference port
 for an MCU without a built-in Ethernet MAC.
 
-## Demo
-
-![demo](docs/demo.gif)
-
-<!-- Suggested content: split screen with (1) ping replies at 1–2 ms, (2) PuTTY Raw
-     session on port 7 echoing text, (3) pressing B1 → "button pressed 3" appears,
-     (4) unplugging the cable → "link down" in the UART log, replug → "link up". -->
-
-| Ping | TCP echo + button event |
-|---|---|
-| ![ping](docs/ping.png) | ![echo](docs/echo.png) |
-
 ## Features
 
 - **Interrupt-driven RX:** the ENC28J60 INT pin (PA0, EXTI0) wakes a dedicated RX task instead of polling
