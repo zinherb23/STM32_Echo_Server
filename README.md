@@ -1,5 +1,9 @@
 # STM32 + ENC28J60 Ethernet with FreeRTOS and lwIP
 
+
+
+
+
 A TCP/IP networking stack running on an STM32F401RE Nucleo board with a low-cost
 ENC28J60 SPI Ethernet module. It uses FreeRTOS and lwIP in full RTOS mode (`NO_SYS=0`)
 and has an interrupt-driven driver, link detection and a TCP echo server.
@@ -9,8 +13,7 @@ for an MCU without a built-in Ethernet MAC.
 ## Features
 
 - **Interrupt-driven RX:** the ENC28J60 INT pin (PA0, EXTI0) wakes a dedicated RX task instead of polling
-- **ICMP ping** with replies in 1–2 ms
-- **TCP echo server on port 7**, one client at a time. A second client is rejected with `busy`
+- **TCP echo server on port 7**, one client at a time.
 - **Link up/down detection.** An open TCP connection survives the cable being unplugged and plugged back in
 - **Push-button events:** pressing B1 sends `button pressed <count>` to the connected client
 - **Thread-safe logging:** `printf` over UART guarded by a mutex, with a panic handler
@@ -40,10 +43,18 @@ Other pins: B1 = PC13 (button), LD2 = PA5 (LED).
 ## Architecture
 
 ```
- PA0 EXTI ──notify──► [enc_rx  prio 5] ──pbuf──► [tcpip  prio 4] ──► [echo    prio 3]
-                       ENC28J60 driver            lwIP core           netconn server
-                       (SPI3)                                          ▲
- PC13 EXTI ─notify──► [button  prio 2] ────────────────────────────────┘
+                          ┌──────────────── ENC28J60 (SPI3, 5.25 MHz) ───────────────┐
+                          │                                                          │
+ PA0 EXTI0 ──task notify──► [enc_rx   prio 5] ──tcpip_input()──► [tcpip   prio 4]    │
+ (ENC INT, falling)          drain RX by EPKTCNT   (pbuf → mbox)    lwIP core:       │
+                             link up/down          ◄─linkoutput()── ARP / IP / ICMP / TCP
+                                                    (TX over SPI)        ▲
+                                                                         │ socket calls
+                                                                         │ (msg to tcpip thread)
+ PC13 EXTI15_10 ─task notify─► [button  prio 2] ──FreeRTOS queue──► [echo    prio 3]
+ (B1, falling)                  debounce, count     (press count)     BSD sockets + select()
+                                                                      port 7, one client,
+                                                                      2nd client → "busy"
 ```
 
 | Task | Priority | Stack (words) | Role |
