@@ -4,6 +4,8 @@
 |---|-|-|
 |1|2|222|
 
+|GU|AU|aa|
+|1|2|222|
 
 A TCP/IP networking stack running on an STM32F401RE Nucleo board with a low-cost
 ENC28J60 SPI Ethernet module. It uses FreeRTOS and lwIP in full RTOS mode (`NO_SYS=0`)
