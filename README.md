@@ -65,14 +65,6 @@ Other pins: B1 = PC13 (button), LD2 = PA5 (LED).
 | echo   | 3 | 768 | TCP echo server, port 7 |
 | button | 2 | 384 | Debounced B1 events → client |
 
-### Design decisions
-
-- **`NO_SYS=0` (full RTOS mode) instead of bare-metal lwIP.** Application code can use the blocking netconn API in its own tasks, and the protocol stack is kept in the tcpip thread. The cost is more RAM, and every call into lwIP has to respect core locking (`LWIP_FREERTOS_CHECK_CORE_LOCKING` is enabled during development to catch mistakes).
-- **The ISR does no SPI work.** The EXTI handler only sends a task notification. All SPI traffic happens in task context, so the bus never has to be shared with an interrupt and ISR latency stays low.
-- **RX task priority is above tcpip.** Frames leave the ENC28J60's 8 KB buffer quickly, which avoids overflow under bursts.
-- **Generated code is kept separate from my code.** Application code lives in its own files (`app.c`, `enc.c`, `ethernetif.c`, `net.c`, `echo.c`, `button.c`) or inside `USER CODE` blocks, so regenerating from CubeMX never overwrites it. SVC/PendSV/SysTick generation is turned off because FreeRTOS owns those handlers, and the HAL timebase runs on TIM5.
-- **The repo is self-contained.** FreeRTOS and lwIP are vendored under `ThirdParty/`, replacing the Eclipse linked resources the project used before, so a fresh clone builds without any sibling folders.
-
 ## Project structure
 
 ```
