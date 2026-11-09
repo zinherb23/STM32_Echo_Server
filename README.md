@@ -1,4 +1,4 @@
-# STM32 + ENC28J60 Ethernet with FreeRTOS and lwIP
+# STM32_echo_server
 
 A TCP/IP networking stack running on an STM32F401RE Nucleo board with a low-cost
 ENC28J60 SPI Ethernet module. It uses FreeRTOS and lwIP in full RTOS mode 
