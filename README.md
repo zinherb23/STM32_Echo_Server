@@ -1,4 +1,4 @@
-# STM32_echo_server
+# STM32_Echo_Server
 
 在STM32F401RE與ENC28J60的驅動程式上移植lwIP與FreeRTOS，並將接收封包的方式改為中斷驅動。實現一個TCP Echo Server，回傳PC端傳送的訊息，同時偵測開發板按鍵，將按鍵事件即時傳送給 PC 端。
 
