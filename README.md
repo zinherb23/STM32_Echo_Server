@@ -33,7 +33,7 @@ Other pins: B1 = PC13 (button), LD2 = PA5 (LED).
 - **MCU:** STM32F401RE (Cortex-M4F, 84 MHz), STM32 HAL, STM32CubeMX / CubeIDE
 - **RTOS:** FreeRTOS Kernel (V11.x), `heap_4`, 32 KB heap
 - **Network stack:** lwIP 2.2.1 (ST's stm32-mw-lwip) with the FreeRTOS `sys_arch` port
-- **Ethernet:** Microchip ENC28J60 (rev B6) over SPI at 5.25 MHz
+- **Ethernet:** Microchip ENC28J60 (rev B7) over SPI at 5.25 MHz
 - **Toolchain:** arm-none-eabi-gcc 13.2
 
 ## Architecture
@@ -77,8 +77,8 @@ Drivers/       STM32 HAL + CMSIS
    git clone https://github.com/zinherb23/stm32-enc28j60-lwip-freertos.git
    ```
 2. In **STM32CubeIDE**: File → Import → *Existing Projects into Workspace* → select the cloned folder.
-3. Set the IP and MAC in `Core/Inc/app_config.h` to match your LAN (default: `<192.168.x.x>`).
+3. Set the IP and MAC in `Core/Inc/app_config.h` to match your LAN (default: `192.168.1.200`).
 4. Build (Debug), connect the Nucleo over USB and click Run.
-5. Open a serial terminal at `<115200>` 8N1 to see the log.
+5. Open a serial terminal at `115200` 8N1 to see the log.
 6. Type something or press B1 and it's echoed back. 
 
