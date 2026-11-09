@@ -7,11 +7,10 @@ It's meant for an MCU without a built-in Ethernet MAC.
 
 ## Features
 
-- **Interrupt-driven RX:** the ENC28J60 INT pin (PA0, EXTI0) wakes a dedicated RX task instead of polling
 - **TCP echo server on port 7**, one client at a time.
+- **Interrupt-driven RX:** the ENC28J60 INT pin (PA0, EXTI0) wakes a dedicated RX task instead of polling
 - **Link up/down detection.** An open TCP connection survives the cable being unplugged and plugged back in
 - **Push-button events:** pressing B1 sends `button pressed <count>` to the connected client
-- **Thread-safe logging:** `printf` over UART guarded by a mutex, with a panic handler
 
 ## Hardware and wiring
 
@@ -29,11 +28,11 @@ Other pins: B1 = PC13 (button), LD2 = PA5 (LED).
 
 ## Tech stack
 
-- **MCU:** STM32F401RE (Cortex-M4F, 84 MHz), STM32 HAL, STM32CubeMX / CubeIDE
-- **RTOS:** FreeRTOS Kernel (V11.x), `heap_4`, 32 KB heap
-- **Network stack:** lwIP 2.2.1 (ST's stm32-mw-lwip) with the FreeRTOS `sys_arch` port
-- **Ethernet:** Microchip ENC28J60 (rev B7) over SPI at 5.25 MHz
-- **Toolchain:** arm-none-eabi-gcc 13.2
+- **MCU:** STM32F401RE
+- **RTOS:** FreeRTOS Kernel (11.3.0)
+- **Network stack:** lwIP (2.2.1)
+- **Ethernet:** Microchip ENC28J60 (v7) 
+- **Toolchain:** arm-none-eabi-gcc (13.2)
 
 ## Architecture
 
