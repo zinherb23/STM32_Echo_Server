@@ -7,10 +7,10 @@ It's meant for an MCU without a built-in Ethernet MAC.
 
 ## Features
 
-- **TCP echo server:** One client at a time.
 - **Interrupt-driven RX:** ENC28J60 INT pin (PA0, EXTI0) wakes a dedicated RX task instead of polling
-- **Link up/down detection.** An open TCP connection survives the cable being unplugged and plugged back in
 - **Push-button events:** Pressing B1 sends `button pressed <count>` to the connected client
+- **TCP echo server:** One client at a time.
+
 
 ## Hardware and wiring
 
