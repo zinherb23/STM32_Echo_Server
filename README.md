@@ -3,8 +3,7 @@
 A TCP/IP networking stack running on an STM32F401RE Nucleo board with a low-cost
 ENC28J60 SPI Ethernet module. It uses FreeRTOS and lwIP in full RTOS mode 
 and has an interrupt-driven driver, link detection and a TCP echo server.
-It's meant for embedded developers who want a small, working reference port
-for an MCU without a built-in Ethernet MAC.
+It's meant for an MCU without a built-in Ethernet MAC.
 
 ## Features
 
